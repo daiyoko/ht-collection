@@ -1,0 +1,24 @@
+-- Create table
+create table ACCOUNT
+(
+  USERNAME VARCHAR2(20),
+  PASSWORD VARCHAR2(20),
+  AGE      NUMBER
+)
+
+insert into ACCOUNT(USERNAME,PASSWORD,AGE) values ('test','12345',20);
+insert into ACCOUNT(USERNAME,PASSWORD,AGE) values ('test2','123456',19);
+insert into ACCOUNT(USERNAME,PASSWORD,AGE) values ('test3','1234',18);
+commit;
+
+create or replace procedure queryInfo(
+age in number,
+c out sys_refcursor
+)
+as
+ageValue number;
+begin
+ageValue :=age;
+open c for select * from ACCOUNT where ACCOUNT.age<ageValue;
+end;
+

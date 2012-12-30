@@ -1,0 +1,21 @@
+-- Create table
+create table ACCOUNT
+(
+  USERNAME VARCHAR2(20),
+  PASSWORD VARCHAR2(20),
+  AGE      NUMBER
+)
+
+insert into ACCOUNT(USERNAME,PASSWORD,AGE) values ('test','12345',20);
+
+
+create or replace procedure queryAge(
+	user  varchar,
+	pass  varchar,
+	age out number
+)
+as
+begin
+	select age into age from ACCOUNT where ACCOUNT.Username=user and ACCOUNT.Password=pass;
+commit;
+end;
